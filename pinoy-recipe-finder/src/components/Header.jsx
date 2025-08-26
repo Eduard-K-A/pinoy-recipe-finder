@@ -1,0 +1,19 @@
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { FavoritesContext } from '../contexts/FavoritesContext.jsx';
+
+function Header() {
+  const { favorites } = useContext(FavoritesContext);
+
+  return (
+    <header className="header">
+      <h1><Link to="/">Pinoy Recipe Finder</Link></h1>
+      <nav>
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/favorites" className="nav-link">Favorites ({favorites.length})</Link>
+      </nav>
+    </header>
+  );
+}
+
+export default Header;
