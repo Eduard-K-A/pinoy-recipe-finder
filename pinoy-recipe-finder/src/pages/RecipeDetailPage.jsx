@@ -42,12 +42,14 @@ function RecipeDetailPage() {
         </div>
         <h2>{recipe.name}</h2>
         <p>{recipe.description}</p>
-        <button
-          onClick={() => toggleFavorite(recipe.id)}
-          className={favorites.includes(recipe.id) ? 'button remove' : 'button add'}
-        >
-          {favorites.includes(recipe.id) ? 'Remove from Favorites' : 'Add to Favorites'}
-        </button>
+        {!favorites.includes(recipe.id) && (
+          <button
+            onClick={() => toggleFavorite(recipe.id)}
+            className="button add"
+          >
+            Add to Favorites
+          </button>
+        )}
         <h3>Ingredients</h3>
         <ul className="ingredient-list">
           {recipe.ingredients.map((ingredient, index) => (

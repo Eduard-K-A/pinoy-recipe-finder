@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { FavoritesContext } from '../contexts/FavoritesContext.jsx';
 
 function RecipeCard({ recipe }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const { favorites, toggleFavorite } = useContext(FavoritesContext);
 
   return (
     <div className="recipe-card">
@@ -30,6 +32,12 @@ function RecipeCard({ recipe }) {
         <h3>{recipe.name}</h3>
         <p>{recipe.description}</p>
       </Link>
+      <button
+        onClick={() => toggleFavorite(recipe.id)}
+        className={favorites.includes(recipe.id) ? 'button remove' : 'button add'}
+      >
+        {favorites.includes(recipe.id) ? 'Remove from Favorites' : 'Add to Favorites'}
+      </button>
     </div>
   );
 }

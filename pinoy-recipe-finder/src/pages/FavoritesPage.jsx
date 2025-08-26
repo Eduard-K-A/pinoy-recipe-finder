@@ -5,9 +5,7 @@ import recipes from '../data/recipes.json';
 
 function FavoritesPage() {
   const { favorites } = useContext(FavoritesContext);
-  const favoriteRecipes = recipes.filter((recipe) =>
-    favorites.includes(recipe.id)
-  );
+  const favoriteRecipes = recipes.filter((recipe) => favorites.includes(recipe.id));
 
   return (
     <div className="container">
