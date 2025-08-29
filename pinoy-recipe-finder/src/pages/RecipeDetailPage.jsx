@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useState, useContext } from 'react';
 import { FavoritesContext } from '../contexts/FavoritesContext.jsx';
+import { FaStar, FaRegStar, FaArrowLeft, FaListUl, FaListOl } from 'react-icons/fa';
 import recipes from '../data/recipes.json';
 
 function RecipeDetailPage() {
@@ -14,54 +15,87 @@ function RecipeDetailPage() {
     return <div className="container">Recipe not found</div>;
   }
 
+  const isFavorite = favorites.includes(recipe.id);
+
   return (
     <div className="container">
-      <button onClick={() => navigate(-1)} className="back-button">
-        &larr; Back
-      </button>
+      {/* Back Button aligned left */}
+      <div className="back-button-wrapper">
+        <button
+          onClick={() => navigate(-1)}
+          className="back-button"
+          aria-label="Go back"
+        >
+          <FaArrowLeft />
+        </button>
+      </div>
+
       <div className="recipe-detail">
-        <div className="recipe-image-container">
-          {!isImageLoaded && (
-            <div className="recipe-detail-image-placeholder">Loading...</div>
-          )}
-          <img
-            src={recipe.image}
-            alt={recipe.name}
-            className="recipe-detail-image"
-            style={{ display: isImageLoaded ? 'block' : 'none' }}
-            onLoad={() => {
-              console.log(`Image loaded: ${recipe.image}`);
-              setIsImageLoaded(true);
-            }}
-            onError={(e) => {
-              console.error(`Image failed to load: ${recipe.image}`);
-              e.target.src = 'https://via.placeholder.com/300';
-              setIsImageLoaded(true);
-            }}
-          />
+        {/* Header with image */}
+        <div className="recipe-detail-header">
+          <div className="recipe-detail-image-container">
+            {!isImageLoaded && (
+              <div className="recipe-detail-image-placeholder">Loading...</div>
+            )}
+            <img
+              src={recipe.image}
+              alt={recipe.name}
+              className="recipe-detail-image"
+              style={{ display: isImageLoaded ? 'block' : 'none' }}
+              onLoad={() => setIsImageLoaded(true)}
+              onError={(e) => {
+                e.target.src = 'https://via.placeholder.com/300';
+                setIsImageLoaded(true);
+              }}
+            />
+          </div>
+          <div className="recipe-header-overlay">
+            <h1>{recipe.name}</h1>
+          </div>
         </div>
-        <h2>{recipe.name}</h2>
-        <p>{recipe.description}</p>
-        {!favorites.includes(recipe.id) && (
-          <button
-            onClick={() => toggleFavorite(recipe.id)}
-            className="button add"
-          >
-            Add to Favorites
-          </button>
-        )}
-        <h3>Ingredients</h3>
-        <ul className="ingredient-list">
-          {recipe.ingredients.map((ingredient, index) => (
-            <li key={index}>{ingredient}</li>
-          ))}
-        </ul>
-        <h3>Instructions</h3>
-        <ol className="instruction-list">
-          {recipe.instructions.map((step, index) => (
-            <li key={index}>{step}</li>
-          ))}
-        </ol>
+
+        {/* Content sections */}
+        <div className="recipe-detail-content">
+          <section className="recipe-section recipe-description-card">
+            <div className="description-header">
+              <h2>Description</h2>
+              <button
+                onClick={() => toggleFavorite(recipe.id)}
+                className="favorite-icon"
+                aria-label={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+              >
+                {isFavorite ? (
+                  <FaStar className="star filled" />
+                ) : (
+                  <FaRegStar className="star" />
+                )}
+              </button>
+            </div>
+            <p className="recipe-description">{recipe.description}</p>
+          </section>
+
+          <section className="recipe-section recipe-ingredients-card">
+            <h2>
+              <FaListUl className="section-icon" /> Ingredients
+            </h2>
+            <ul className="ingredient-list">
+              {recipe.ingredients.map((ingredient, index) => (
+                <li key={index}>{ingredient}</li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="recipe-section recipe-instructions-card">
+            <h2>
+              <FaListOl className="section-icon" /> Instructions
+            </h2>
+            <ol className="instruction-list">
+              {recipe.instructions.map((step, index) => (
+                <li key={index}>{step}</li>
+              ))}
+            </ol>
+          </section>
+        </div>
       </div>
     </div>
   );
