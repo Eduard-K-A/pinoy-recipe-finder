@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import RecipeCard from '../components/RecipeCard.jsx';
 import recipes from '../data/recipes.json';
+import Footer from './Footer.jsx';
 
 function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -34,6 +35,9 @@ function HomePage() {
           <RecipeCard key={recipe.id} recipe={recipe} />
         ))}
       </div>
+
+      {/* 👇 Footer goes here */}
+      <Footer />
     </div>
   );
 }
