@@ -30,13 +30,19 @@ function HomePage() {
           className="search-input"
         />
       </div>
-      <div className="recipe-grid">
-        {filteredRecipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
-        ))}
-      </div>
+      
+      {filteredRecipes.length === 0 ? (
+        <p style={{ textAlign: 'center', color: '#777', marginTop: '20px' }}>
+          Recipe not found
+        </p>
+      ) : (
+        <div className="recipe-grid">
+          {filteredRecipes.map((recipe) => (
+            <RecipeCard key={recipe.id} recipe={recipe} />
+          ))}
+        </div>
+      )}
 
-      {/* 👇 Footer goes here */}
       <Footer />
     </div>
   );

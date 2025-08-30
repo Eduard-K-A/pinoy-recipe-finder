@@ -11,7 +11,7 @@ function FavoritesPage() {
     <div className="container">
       <h2>Favorite Recipes</h2>
       {favoriteRecipes.length === 0 ? (
-        <p>No favorite recipes yet.</p>
+        <p>No favorite recipes yet.Try adding one!</p>
       ) : (
         <div className="recipe-grid">
           {favoriteRecipes.map((recipe) => (
