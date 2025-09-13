@@ -12,7 +12,7 @@ function RecipeDetailPage() {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   if (!recipe) {
-    return <div className="container">Recipe not found</div>;
+    return <div className="container">Recipe not found!</div>;
   }
 
   const isFavorite = favorites.includes(recipe.id);

@@ -39,6 +39,17 @@ body {
   padding: 16px;
 }
 
+.empty-favorites {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 50vh; /* centers vertically in viewport */
+  color: #555;
+  font-size: 18px;
+}
+
 .search-bar {
   margin-bottom: 16px;
 }

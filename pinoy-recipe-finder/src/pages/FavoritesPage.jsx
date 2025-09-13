@@ -8,7 +8,7 @@ function FavoritesPage() {
   const favoriteRecipes = recipes.filter((recipe) => favorites.includes(recipe.id));
 
   return (
-    <div className="container">
+    <div className="empty-favorites" style={{ paddingTop: 20 }}>
       <h2>Favorite Recipes</h2>
       {favoriteRecipes.length === 0 ? (
         <p>No favorite recipes yet.</p>

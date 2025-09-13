@@ -5,7 +5,7 @@ import Footer from './Footer.jsx';
 
 function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(searchTerm);
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -19,9 +19,13 @@ function HomePage() {
     recipe.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
   );
 
+  // show message only when user actually typed something and there are no matches
+  const showNotFound =
+    debouncedSearchTerm.trim() !== '' && filteredRecipes.length === 0;
+
   return (
     <div className="container">
-      <div className="search-bar">
+      <div className="search-bar" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
         <input
           type="text"
           placeholder="Search recipes..."
@@ -30,13 +34,25 @@ function HomePage() {
           className="search-input"
         />
       </div>
-      <div className="recipe-grid">
-        {filteredRecipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
-        ))}
-      </div>
 
-      {/* 👇 Footer goes here */}
+      {/* Not found message shown directly under the search bar */}
+      {showNotFound ? (
+        <div
+          className="not-found-message"
+          role="status"
+          aria-live="polite"
+          style={{ marginTop: 16, textAlign: 'center' }}
+        >
+          No recipes found for "<strong>{debouncedSearchTerm}</strong>"
+        </div>
+      ) : (
+        <div className="recipe-grid" style={{ marginTop: 16 }}>
+          {filteredRecipes.map((recipe) => (
+            <RecipeCard key={recipe.id} recipe={recipe} />
+          ))}
+        </div>
+      )}
+
       <Footer />
     </div>
   );
