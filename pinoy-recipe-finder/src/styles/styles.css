@@ -37,7 +37,9 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .empty-favorites {
@@ -58,9 +60,9 @@ body {
   gap: 15px;
 }
 
-
 .search-bar {
   margin-bottom: 16px;
+  width: 100%;
 }
 
 .search-input {
@@ -79,11 +81,10 @@ body {
 
 .recipe-grid {
   display: grid;
-  grid-template-columns:repeat(4, 1fr);
-  
+  grid-template-columns: repeat(4, 1fr);
+
   gap: 15px;
 }
-
 
 .recipe-card {
   border: 1px solid #ccc;
@@ -259,12 +260,14 @@ body {
   line-height: 1.6;
 }
 
-.ingredient-list, .instruction-list {
+.ingredient-list,
+.instruction-list {
   padding-left: 20px;
   margin-bottom: 0;
 }
 
-.ingredient-list li, .instruction-list li {
+.ingredient-list li,
+.instruction-list li {
   margin-bottom: 8px;
   font-size: 16px;
   color: #333;
@@ -284,7 +287,7 @@ body {
 }
 
 .star {
-   font-size: 36px;
+  font-size: 36px;
   color: #f1c40f; /* always gold */
   transition: transform 0.2s, color 0.2s;
 }
@@ -307,7 +310,6 @@ body {
   color: #f1c40f;
   text-shadow: 0px 0px 6px rgba(241, 196, 15, 0.6);
 }
-
 
 .back-button {
   position: sticky;
@@ -438,7 +440,7 @@ body {
   padding: 12px;
   text-align: center;
   font-size: 13px;
-  color: #777;              /* soft gray text */
+  color: #777; /* soft gray text */
   background-color: transparent; /* no solid background */
-   border-top: 1px solid #ddd; /* very subtle divider */
+  border-top: 1px solid #ddd; /* very subtle divider */
 }
