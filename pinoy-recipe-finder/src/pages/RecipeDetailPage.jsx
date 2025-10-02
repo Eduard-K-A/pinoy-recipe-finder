@@ -10,6 +10,7 @@ function RecipeDetailPage() {
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
   const recipe = recipes.find((r) => r.id === parseInt(id));
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [notification, setNotification] = useState(null);
 
   if (!recipe) {
     return <div className="container">Recipe not found!</div>;
@@ -17,8 +18,25 @@ function RecipeDetailPage() {
 
   const isFavorite = favorites.includes(recipe.id);
 
+  const handleToggleFavorite = () => {
+    toggleFavorite(recipe.id);
+    const message = isFavorite 
+      ? 'Recipe removed from favorites' 
+      : 'Recipe added to favorites';
+    
+    setNotification(message);
+    setTimeout(() => setNotification(null), 3000);
+  };
+
   return (
     <div className="container">
+      {/* Notification */}
+      {notification && (
+        <div className="notification">
+          {notification}
+        </div>
+      )}
+
       {/* Back Button aligned left */}
       <div className="back-button-wrapper">
         <button
@@ -60,7 +78,7 @@ function RecipeDetailPage() {
             <div className="description-header">
               <h2>Description</h2>
               <button
-                onClick={() => toggleFavorite(recipe.id)}
+                onClick={handleToggleFavorite}
                 className="favorite-icon"
                 aria-label={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
               >
