@@ -15,7 +15,7 @@ function FavoritesPage() {
       {favoriteRecipes.length === 0 ? (
         <p
           className="no-favorites-msg"
-          style={{ textAlign: "center", marginTop: "20px" }}
+          style={{ textAlign: "center", marginTop: "20px", color: "gray"}}
           onMouseEnter={(e) => {
             e.target.style.cursor = "pointer";
             e.target.style.textDecoration = "underline";
