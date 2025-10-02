@@ -4,12 +4,30 @@ import { FavoritesContext } from '../contexts/FavoritesContext.jsx';
 
 function RecipeCard({ recipe }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [notification, setNotification] = useState(null);
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
 
   const isFavorite = favorites.includes(recipe.id);
 
+  const handleToggleFavorite = () => {
+    toggleFavorite(recipe.id);
+    const message = isFavorite 
+      ? 'Recipe removed from favorites' 
+      : 'Recipe added to favorites';
+    
+    setNotification(message);
+    setTimeout(() => setNotification(null), 3000);
+  };
+
   return (
     <div className="recipe-card">
+      {/* Notification */}
+      {notification && (
+        <div className="notification">
+          {notification}
+        </div>
+      )}
+
       <div className="recipe-card-content">
         <Link to={`/recipe/${recipe.id}`}>
           <div className="recipe-image-container">
@@ -35,7 +53,7 @@ function RecipeCard({ recipe }) {
 
       {/* Add/Remove Favorites Button */}
       <button
-        onClick={() => toggleFavorite(recipe.id)}
+        onClick={handleToggleFavorite}
         className={isFavorite ? 'button remove' : 'button add'}
       >
         {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
