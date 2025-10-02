@@ -1,18 +1,32 @@
-import { useContext } from 'react';
-import { FavoritesContext } from '../contexts/FavoritesContext.jsx';
-import RecipeCard from '../components/RecipeCard.jsx';
-import recipes from '../data/recipes.json';
+import { useContext } from "react";
+import { FavoritesContext } from "../contexts/FavoritesContext.jsx";
+import RecipeCard from "../components/RecipeCard.jsx";
+import recipes from "../data/recipes.json";
 
 function FavoritesPage() {
   const { favorites } = useContext(FavoritesContext);
-  const favoriteRecipes = recipes.filter((recipe) => favorites.includes(recipe.id));
+  const favoriteRecipes = recipes.filter((recipe) =>
+    favorites.includes(recipe.id)
+  );
 
   return (
     <div className="container" style={{ paddingTop: 20 }}>
       <h2>Favorite Recipes</h2>
       {favoriteRecipes.length === 0 ? (
-        <p className="no-favorites-msg" style={{ textAlign: 'center', marginTop: '20px' }} onMouseOver={(e) => e.target.style.textDecoration = 'underline'} onMouseLeave={(e) => e.target.style.textDecoration = 'none'} onClick={() => window.location.href = '/'}>
-          No favorite recipes yet. Add one!
+        <p
+          className="no-favorites-msg"
+          style={{ textAlign: "center", marginTop: "20px" }}
+          onMouseEnter={(e) => {
+            e.target.style.cursor = "pointer";
+            e.target.style.textDecoration = "underline";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.cursor = "auto";
+            e.target.style.textDecoration = "none";
+          }}
+          onClick={() => (window.location.href = "/")}
+        >
+          No favorite recipes yet.
         </p>
       ) : (
         <div className="favorites-grid">
