@@ -9,20 +9,19 @@ function FavoritesPage() {
 
   return (
     <div className="container" style={{ paddingTop: 20 }}>
-  <h2>Favorite Recipes</h2>
-  {favoriteRecipes.length === 0 ? (
-    <div className="empty-favorites">
-      <p>No favorite recipes yet.</p>
+      <h2>Favorite Recipes</h2>
+      {favoriteRecipes.length === 0 ? (
+        <p className="no-favorites-msg" style={{ textAlign: 'center', marginTop: '20px' }} onMouseOver={(e) => e.target.style.textDecoration = 'underline'} onMouseLeave={(e) => e.target.style.textDecoration = 'none'} onClick={() => window.location.href = '/'}>
+          No favorite recipes yet. Add one!
+        </p>
+      ) : (
+        <div className="favorites-grid">
+          {favoriteRecipes.map((recipe) => (
+            <RecipeCard key={recipe.id} recipe={recipe} />
+          ))}
+        </div>
+      )}
     </div>
-  ) : (
-    <div className="favorites-grid">
-      {favoriteRecipes.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
-      ))}
-    </div>
-  )}
-</div>
-
   );
 }
 
