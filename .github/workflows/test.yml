@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'npm'  # Enable caching for npm
 
       - name: Cache npm dependencies
         uses: actions/cache@v3
@@ -38,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: dist
+          path: dist/
