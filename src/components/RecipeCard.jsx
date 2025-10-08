@@ -1,33 +1,29 @@
 import { Link } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { FavoritesContext } from '../contexts/FavoritesContext.jsx';
+import { useNotification } from '../contexts/NotificationContext.jsx'; // 👈 import global notification hook
 
 function RecipeCard({ recipe }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const [notification, setNotification] = useState(null);
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
+  const { showNotification } = useNotification(); // 👈 use notification from context
 
   const isFavorite = favorites.includes(recipe.id);
 
   const handleToggleFavorite = () => {
     toggleFavorite(recipe.id);
-    const message = isFavorite 
-      ? 'Recipe removed from favorites' 
+
+    // Determine message
+    const message = isFavorite
+      ? 'Recipe removed from favorites'
       : 'Recipe added to favorites';
-    
-    setNotification(message);
-    setTimeout(() => setNotification(null), 3000);
+
+    // 👇 Show global notification (persists across routes)
+    showNotification(message);
   };
 
   return (
     <div className="recipe-card">
-      {/* Notification */}
-      {notification && (
-        <div className="notification">
-          {notification}
-        </div>
-      )}
-
       <div className="recipe-card-content">
         <Link to={`/recipe/${recipe.id}`}>
           <div className="recipe-image-container">
@@ -46,7 +42,7 @@ function RecipeCard({ recipe }) {
               }}
             />
           </div>
-          <h3 className='recipe-name'>{recipe.name}</h3>
+          <h3>{recipe.name}</h3>
           <p>{recipe.description}</p>
         </Link>
       </div>
