@@ -46,7 +46,7 @@ function RecipeCard({ recipe }) {
               }}
             />
           </div>
-          <h3>{recipe.name}</h3>
+          <h3 className='recipe-name'>{recipe.name}</h3>
           <p>{recipe.description}</p>
         </Link>
       </div>
