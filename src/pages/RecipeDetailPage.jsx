@@ -37,20 +37,21 @@ function RecipeDetailPage() {
         </div>
       )}
 
-      {/* Back Button aligned left */}
-      <div className="back-button-wrapper">
-        <button
-          onClick={() => navigate(-1)}
-          className="back-button"
-          aria-label="Go back"
-        >
-          <FaArrowLeft />
-        </button>
-      </div>
+      {/* Back Button will be placed over the header image (moved into header below) */}
 
       <div className="recipe-detail">
         {/* Header with image */}
         <div className="recipe-detail-header">
+          {/* Back Button positioned relative to the header/image */}
+          <div className="back-button-wrapper left">
+            <button
+              onClick={() => navigate(-1)}
+              className="back-button"
+              aria-label="Go back"
+            >
+              <FaArrowLeft />
+            </button>
+          </div>
           <div className="recipe-detail-image-container">
             {!isImageLoaded && (
               <div className="recipe-detail-image-placeholder">Loading...</div>
